@@ -2,6 +2,17 @@ import ProductSwiper from "../productswiper/ProductSwiper";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
 const BestDeals = () => {
+  const productList = [
+    { productName: "phone 1", productImage: "phone1.webp" },
+    { productName: "phone 2", productImage: "phone2.webp" },
+    { productName: "phone 3", productImage: "phone3.webp" },
+    { productName: "phone 4", productImage: "phone4.webp" },
+    { productName: "phone 5", productImage: "phone5.webp" },
+    { productName: "phone 6", productImage: "phone6.webp" },
+    { productName: "phone 1", productImage: "phone1.webp" },
+    { productName: "phone 2", productImage: "phone2.webp" },
+    { productName: "phone 3", productImage: "phone3.webp" },
+  ];
   return (
     <>
       <div className="flex h-96 my-5">
@@ -18,7 +29,7 @@ const BestDeals = () => {
             </div>
           </div>
           <div className="p-5">
-            <ProductSwiper />
+            <ProductSwiper productList={productList} />
           </div>
         </div>
         <div className="w-1/6 h-96">

@@ -1,11 +1,15 @@
 import BigPanelItems from "./BigPanelItems";
 
 const BigPanelContainer = () => {
-  const data = ["panel1", "panel2", "panel3"];
+  const data = [
+    "bigpanelitem1.webp",
+    "bigpanelitem2.webp",
+    "bigpanelitem3.webp",
+  ];
   return (
     <div className="flex">
       {data.map((item) => (
-        <BigPanelItems />
+        <BigPanelItems imageName={item} />
       ))}
     </div>
   );

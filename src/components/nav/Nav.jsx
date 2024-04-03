@@ -66,7 +66,7 @@ export default function Nav() {
   return (
     <header className="bg-white">
       <nav
-        className="mx-auto flex max-w-[90%] items-center justify-between p-4 lg:px-8"
+        className="mx-auto flex max-w-[90%] items-center justify-between lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">

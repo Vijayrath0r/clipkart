@@ -10,7 +10,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProductSwiperItem from "./ProductSwiperItem";
 
-export default () => {
+export default ({ productList }) => {
+  console.log(productList);
   return (
     <Swiper
       // install Swiper modules
@@ -21,30 +22,14 @@ export default () => {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log("slide change")}
     >
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductSwiperItem />
-      </SwiperSlide>
+      {productList.map((product) => (
+        <SwiperSlide>
+          <ProductSwiperItem
+            productName={product.productName}
+            productImage={product.productImage}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
