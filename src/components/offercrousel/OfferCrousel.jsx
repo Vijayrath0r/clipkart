@@ -27,16 +27,16 @@ function OfferCrousel() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="/offercrousel.webp" alt="..." />
+          <img className="w-[100%]" src="/offercrousel.webp" alt="..." />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/offercrousel.webp" alt="..." />
+          <img className="w-[100%]" src="/offercrousel.webp" alt="..." />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/offercrousel.webp" alt="..." />
+          <img className="w-[100%]" src="/offercrousel.webp" alt="..." />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/offercrousel.webp" alt="..." />
+          <img className="w-[100%]" src="/offercrousel.webp" alt="..." />
         </SwiperSlide>
       </Swiper>
     </div>

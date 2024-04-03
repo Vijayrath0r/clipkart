@@ -7,6 +7,7 @@ import BestDeals from "./components/bestdeals/BestDeals";
 import BigPanelContainer from "./components/bigpanels/BigPanelContainer";
 import TopDeals from "./components/topdeals/TopDeals";
 import FestivalSpecialContainer from "./components/festivalspecial/FestivalSpecialContainer";
+import InfiniteScrollMenu from "./components/infiniteScroll/InfiniteScrollMenu";
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
         <CategoryBar />
         <OfferCrousel />
         <BestDeals />
-        <BigPanelContainer/>
-        <TopDeals/>
-        <FestivalSpecialContainer/>
+        <BigPanelContainer />
+        <TopDeals />
+        <FestivalSpecialContainer />
+        <InfiniteScrollMenu />
       </div>
       <Footer />
     </>

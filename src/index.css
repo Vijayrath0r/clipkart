@@ -6,6 +6,9 @@ html {
     background-color: #f1efef;
 }
 
-.main {
-    height: 2500px;
+.infinite-scroll-component {
+    overflow: hidden !important;
+}
+.swiper-button-disabled{
+    display: none!important;
 }

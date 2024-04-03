@@ -12,7 +12,7 @@ const BestDeals = () => {
             </div>
             <div className="p-5">
               <IoIosArrowDroprightCircle
-                size={45}
+                size={30}
                 style={{ color: "#2a55e5" }}
               />
             </div>
