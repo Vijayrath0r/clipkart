@@ -1,0 +1,46 @@
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+function OfferCrousel() {
+  return (
+    <div className="h-72">
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <img src="/offercrousel.webp" alt="..." />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/offercrousel.webp" alt="..." />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/offercrousel.webp" alt="..." />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/offercrousel.webp" alt="..." />
+        </SwiperSlide>
+      </Swiper>
+    </div>
+  );
+}
+
+export default OfferCrousel;
