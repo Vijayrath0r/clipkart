@@ -1,4 +1,4 @@
-import CategoryBarItem from "../categorybarItem/CategoryBarItem";
+import CategoryBarItem from "./CategoryBarItem";
 
 const CategoryBar = () => {
   const categoryList = [

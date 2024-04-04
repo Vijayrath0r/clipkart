@@ -4,57 +4,53 @@ import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import { PiDiamondsFourBold } from "react-icons/pi";
+import { CiHeart } from "react-icons/ci";
+import { IoGiftOutline } from "react-icons/io5";
+import { MdOutlineCardGiftcard } from "react-icons/md";
+
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const products = [
   {
-    name: "Analytics",
+    name: "My Profile",
     description: "Get a better understanding of your traffic",
     href: "#",
-    icon: ChartPieIcon,
+    icon: FaRegUserCircle,
   },
   {
-    name: "Engagement",
+    name: "ClipKart Plus Zone",
     description: "Speak directly to your customers",
     href: "#",
-    icon: CursorArrowRaysIcon,
+    icon: PiDiamondsFourBold,
   },
   {
-    name: "Security",
+    name: "Orders",
     description: "Your customers’ data will be safe and secure",
     href: "#",
-    icon: FingerPrintIcon,
+    icon: GrCart,
   },
   {
-    name: "Integrations",
+    name: "WishList",
     description: "Connect with third-party tools",
     href: "#",
-    icon: SquaresPlusIcon,
+    icon: CiHeart,
   },
   {
-    name: "Automations",
+    name: "Rewards",
     description: "Build strategic funnels that will convert",
     href: "#",
-    icon: ArrowPathIcon,
+    icon: IoGiftOutline,
+  },
+  {
+    name: "Gift Cards",
+    description: "Build strategic funnels that will convert",
+    href: "#",
+    icon: MdOutlineCardGiftcard,
   },
 ];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
+const callsToAction = [{ name: "New Customer? Sign up", href: "#" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -116,14 +112,14 @@ export default function Nav() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-xs overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
                   {products.map((item) => (
                     <div
                       key={item.name}
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
-                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                      <div className="flexflex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
                           className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
                           aria-hidden="true"
@@ -137,22 +133,17 @@ export default function Nav() {
                           {item.name}
                           <span className="absolute inset-0" />
                         </a>
-                        <p className="mt-1 text-gray-600">{item.description}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                <div className="divide-x divide-gray-900/5 bg-gray-50">
                   {callsToAction.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                     >
-                      <item.icon
-                        className="h-5 w-5 flex-none text-gray-400"
-                        aria-hidden="true"
-                      />
                       {item.name}
                     </a>
                   ))}

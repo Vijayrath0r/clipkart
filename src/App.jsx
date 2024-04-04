@@ -8,7 +8,6 @@ import BigPanelContainer from "./components/bigpanels/BigPanelContainer";
 import TopDeals from "./components/topdeals/TopDeals";
 import FestivalSpecialContainer from "./components/festivalspecial/FestivalSpecialContainer";
 import InfiniteScrollMenu from "./components/infiniteScroll/InfiniteScrollMenu";
-import RecentlyVisitedContainer from "./components/recentlyvisited/RecentlyVisitedContainer";
 
 function App() {
   return (
