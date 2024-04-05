@@ -1,0 +1,18 @@
+import ProductsContainer from "../components/products/ProductsContainer";
+import ProductsLoading from "../components/products/ProductsLoading";
+import useFetch from "../hooks/useFetch";
+
+const Products = () => {
+  const { data } = useFetch("https://dummyjson.com/products");
+  const productList = data.products;
+  return (
+    <div className="w-full">
+      {productList && productList.length > 0 ? (
+        <ProductsContainer productList={productList} />
+      ) : (
+        <ProductsLoading />
+      )}
+    </div>
+  );
+};
+export default Products;

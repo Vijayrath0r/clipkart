@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FestivalCard from "./FestivalCard";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
@@ -15,9 +16,9 @@ const FestivalSpecialContainer = () => {
           <div className="text-[20px] font-medium p-5 h-[10%]">
             Festive Specials, Just For You!
           </div>
-          <div className="p-5">
+          <Link to="/products" className="p-5">
             <IoIosArrowDroprightCircle size={30} style={{ color: "#2a55e5" }} />
-          </div>
+          </Link>
         </div>
         <div className="w-full h-full h-[90%]">
           {prodList.map((product) => (

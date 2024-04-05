@@ -11,6 +11,7 @@ import { MdOutlineCardGiftcard } from "react-icons/md";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -65,12 +66,12 @@ export default function Nav() {
         className="mx-auto flex max-w-[90%] items-center justify-between lg:px-8"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
+        <Link to="/" className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img className="h-16 w-auto" src="/clipkart.png" alt="" />
           </a>
-        </div>
+        </Link>
         <div className="flex lg:hidden">
           <button
             type="button"

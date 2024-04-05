@@ -9,6 +9,7 @@ html {
 .infinite-scroll-component {
     overflow: hidden !important;
 }
-.swiper-button-disabled{
-    display: none!important;
+
+.swiper-button-disabled {
+    display: none !important;
 }

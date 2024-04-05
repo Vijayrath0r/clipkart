@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ProductSwiper from "../productswiper/ProductSwiper";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
@@ -21,12 +22,12 @@ const BestDeals = () => {
             <div className="text-[20px] font-medium p-5">
               Best Deals on Smartphones
             </div>
-            <div className="p-5">
+            <Link to="/products" className="p-5">
               <IoIosArrowDroprightCircle
                 size={30}
                 style={{ color: "#2a55e5" }}
               />
-            </div>
+            </Link>
           </div>
           <div className="p-5">
             <ProductSwiper productList={productList} />
