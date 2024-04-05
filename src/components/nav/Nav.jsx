@@ -67,10 +67,10 @@ export default function Nav() {
         aria-label="Global"
       >
         <Link to="/" className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <div href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img className="h-16 w-auto" src="/clipkart.png" alt="" />
-          </a>
+          </div>
         </Link>
         <div className="flex lg:hidden">
           <button
