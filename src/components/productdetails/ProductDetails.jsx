@@ -38,11 +38,17 @@ const ProductDetails = () => {
           <div className="flex">
             <div className="w-1/6"></div>
             <div className="w-5/6 text-white">
-              <Link className="inline-block w-5/12 bg-[#ff9f00] m-1 p-5 text-center">
+              <Link
+                to="/viewcart"
+                className="inline-block w-5/12 bg-[#ff9f00] m-1 p-5 text-center"
+              >
                 <IoCart style={{ display: "inline", padding: "1px" }} />
                 <span>Go To cart</span>
               </Link>
-              <Link className="inline-block w-5/12 bg-[#fb641b] m-1 p-5 text-center">
+              <Link
+                to="/viewcart"
+                className="inline-block w-5/12 bg-[#fb641b] m-1 p-5 text-center"
+              >
                 <AiFillThunderbolt
                   style={{ display: "inline", padding: "1px" }}
                 />
