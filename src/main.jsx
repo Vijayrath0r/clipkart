@@ -7,6 +7,8 @@ import Home from "./pages/Home.jsx";
 import Products from "./pages/Products.jsx";
 import Product from "./pages/Product.jsx";
 import ViewCart from "./pages/ViewCart.jsx";
+import User from "./pages/User.jsx";
+import Vendor from "./pages/Vendor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "viewcart",
         element: <ViewCart />,
+      },
+      {
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "vendor",
+        element: <Vendor />,
       },
     ],
   },

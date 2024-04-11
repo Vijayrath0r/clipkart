@@ -51,7 +51,7 @@ const products = [
     icon: MdOutlineCardGiftcard,
   },
 ];
-const callsToAction = [{ name: "New Customer? Sign up", href: "#" }];
+const callsToAction = [{ name: "New Customer? Sign up", to: "/user" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -140,13 +140,13 @@ export default function Nav() {
                 </div>
                 <div className="divide-x divide-gray-900/5 bg-gray-50">
                   {callsToAction.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.to}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </Popover.Panel>
@@ -160,9 +160,12 @@ export default function Nav() {
             <GrCart size={20} className="mx-4" />
             Cart
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            to="/vendor"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Become a Seller
-          </a>
+          </Link>
           <a href="#" className="text-sm font-semibold p-[4px]">
             <PiDotsThreeOutlineVerticalFill />
           </a>
@@ -214,8 +217,8 @@ export default function Nav() {
                         {[...products, ...callsToAction].map((item) => (
                           <Disclosure.Button
                             key={item.name}
-                            as="a"
-                            href={item.href}
+                            as="Link"
+                            to={item.to}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             {item.name}
