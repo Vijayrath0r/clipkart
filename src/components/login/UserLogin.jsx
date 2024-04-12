@@ -15,7 +15,7 @@ const UserLogin = ({ changePageUser }) => {
       .email("Enter an vaild Email"),
     password: yup.string().required("Password is required"),
   });
-  const [errors, serError] = useState(false);
+  const [errors, setError] = useState(false);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -27,21 +27,21 @@ const UserLogin = ({ changePageUser }) => {
     e.preventDefault();
     try {
       await userLoginSchema.validate(formData, { abortEarly: false });
-      serError(false);
+      setError(false);
 
       const response = await axios.post(
         "http://localhost:3002/user/login",
         formData
       );
       if (response.data.status == 0) {
-        serError(true);
+        setError(true);
       } else {
         navigate("/", { state: { responseData: response.data } });
         window.location.reload();
       }
     } catch (error) {
       if (error.inner && error.inner.length > 0) {
-        serError(true);
+        setError(true);
       }
     }
   };

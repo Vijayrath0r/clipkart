@@ -1,10 +1,21 @@
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useState } from "react";
+import * as yup from "yup";
 const VendorLogin = ({ changePageUser }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const [errors, serError] = useState({});
+  const vendorLoginSchema = yup.object({
+    username: yup
+      .string()
+      .required("Email is required")
+      .email("Enter an vaild Email"),
+    password: yup.string().required("Password is required"),
+  });
+  const [errors, setError] = useState(false);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -14,6 +25,25 @@ const VendorLogin = ({ changePageUser }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await vendorLoginSchema.validate(formData, { abortEarly: false });
+      setError(false);
+
+      const response = await axios.post(
+        "http://localhost:3002/vendor/login",
+        formData
+      );
+      if (response.data.status == 0) {
+        setError(true);
+      } else {
+        navigate("/", { state: { responseData: response.data } });
+        window.location.reload();
+      }
+    } catch (error) {
+      if (error.inner && error.inner.length > 0) {
+        setError(true);
+      }
+    }
   };
   return (
     <>
@@ -37,9 +67,6 @@ const VendorLogin = ({ changePageUser }) => {
               placeholder="Enter your Email"
               onChange={handleInputChange}
             />
-            {errors.username && (
-              <p className="text-red-500 text-xs">{errors.username}</p>
-            )}
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -58,11 +85,13 @@ const VendorLogin = ({ changePageUser }) => {
               placeholder="******************"
               onChange={handleInputChange}
             />
-            {errors.password && (
-              <p className="text-red-500 text-xs">{errors.password}</p>
-            )}
           </div>
         </div>
+        {errors && (
+          <p className="text-red-500 text-sm text-center">
+            Invalid Username or password
+          </p>
+        )}
         <div className="flex flex-wrap -mx-3">
           <button
             className="appearance-none block w-full bg-blue-500 text-white border border-gray-200 rounded py-3 px-4 m-3  leading-tight focus:outline-none focus:bg-blue-600 focus:scale-105"

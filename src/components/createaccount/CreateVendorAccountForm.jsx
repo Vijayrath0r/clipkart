@@ -6,13 +6,14 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
     firstName: "",
     lastName: "",
     userEmail: "",
+    userOrg: "",
     password: "",
     confirmPassword: "",
     userCity: "",
     userState: "",
     zipCode: "",
   });
-  const [errors, serError] = useState({});
+  const [errors, setError] = useState({});
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -23,6 +24,7 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
   const userSchema = yup.object({
     firstName: yup.string().required("First Name is required"),
     lastName: yup.string().required("Last Name is required"),
+    userOrg: yup.string().required("Organisation Name is required"),
     userEmail: yup
       .string()
       .required("Email is required")
@@ -50,18 +52,27 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setError({});
       await userSchema.validate(formData, { abortEarly: false });
+      console.log(formData);
 
       const response = await axios.post(
-        "http://localhost:3002/user/create",
+        "http://localhost:3002/vendor/create",
         formData
       );
+      if (response.data.status == 0) {
+        const newError = {};
+        newError["userEmail"] = response.data.message;
+        setError(newError);
+      } else {
+        setError({});
+      }
     } catch (error) {
       const newError = {};
       error.inner.forEach((err) => {
         newError[err.path] = err.message;
       });
-      serError(newError);
+      setError(newError);
     }
   };
   return (
@@ -107,6 +118,27 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
             />
             {errors.lastName && (
               <p className="text-red-500 text-xs">{errors.lastName}</p>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="grid-org"
+            >
+              Orgnisation Name
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="grid-org"
+              name="userOrg"
+              type="text"
+              placeholder="Enter Orgnisation Name"
+              onChange={handleInputChange}
+            />
+            {errors.userOrg && (
+              <p className="text-red-500 text-xs">{errors.userOrg}</p>
             )}
           </div>
         </div>
