@@ -11,9 +11,10 @@ const UserLogin = ({ changePageUser }) => {
   const userLoginSchema = yup.object({
     username: yup
       .string()
+      .trim()
       .required("Email is required")
       .email("Enter an vaild Email"),
-    password: yup.string().required("Password is required"),
+    password: yup.string().trim().required("Password is required"),
   });
   const [errors, setError] = useState(false);
   const handleInputChange = (event) => {

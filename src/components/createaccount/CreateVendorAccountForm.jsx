@@ -22,15 +22,17 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
     });
   };
   const userSchema = yup.object({
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
-    userOrg: yup.string().required("Organisation Name is required"),
+    firstName: yup.string().trim().required("First Name is required"),
+    lastName: yup.string().trim().required("Last Name is required"),
+    userOrg: yup.string().trim().required("Organisation Name is required"),
     userEmail: yup
       .string()
+      .trim()
       .required("Email is required")
       .email("Enter an vaild Email"),
     password: yup
       .string()
+      .trim()
       .required("Password is required")
       .min(8, "Password must be at least 8 characters")
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
@@ -46,6 +48,7 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
       ),
     confirmPassword: yup
       .string()
+      .trim()
       .required("Field is required")
       .oneOf([yup.ref("password"), null], "Passwords must match"),
   });
