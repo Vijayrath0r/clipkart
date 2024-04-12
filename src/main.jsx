@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import App from "./pages/App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
@@ -9,6 +9,7 @@ import Product from "./pages/Product.jsx";
 import ViewCart from "./pages/ViewCart.jsx";
 import User from "./pages/User.jsx";
 import Vendor from "./pages/Vendor.jsx";
+import VendorTemplate from "./pages/VendorTemplate.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,14 @@ const router = createBrowserRouter([
         path: "user",
         element: <User />,
       },
-      {
-        path: "vendor",
-        element: <Vendor />,
-      },
+    ],
+  },
+  {
+    path: "/vendor",
+    element: <VendorTemplate />,
+    children: [
+      { path: "", element: <Vendor /> },
+      { path: "dashboard", element: <div>This is dashboard</div> },
     ],
   },
 ]);
