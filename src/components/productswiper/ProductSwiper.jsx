@@ -11,7 +11,6 @@ import "swiper/css/scrollbar";
 import ProductSwiperItem from "./ProductSwiperItem";
 
 export default ({ productList }) => {
-  console.log(productList);
   return (
     <Swiper
       // install Swiper modules
@@ -19,8 +18,6 @@ export default ({ productList }) => {
       spaceBetween={50}
       slidesPerView={6}
       navigation
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
     >
       {productList.map((product) => (
         <SwiperSlide>

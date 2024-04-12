@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -11,8 +11,7 @@ import { MdOutlineCardGiftcard } from "react-icons/md";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 const products = [
   {
     name: "My Profile",
@@ -51,14 +50,21 @@ const products = [
     icon: MdOutlineCardGiftcard,
   },
 ];
-const callsToAction = [{ name: "New Customer? Sign up", to: "/user" }];
+let callsToAction = [{ name: "New Customer? Sign up", to: "/user" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Nav() {
+  const location = useLocation();
+  const [responseData, setResponseData] = useState(
+    location.state?.responseData
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const handleLogout = () => {
+    setResponseData(null);
+  };
 
   return (
     <header className="bg-white">
@@ -97,7 +103,11 @@ export default function Nav() {
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               <FaRegUserCircle size={24} />
-              Login
+              {responseData
+                ? responseData.data[0].firstname +
+                  " " +
+                  responseData.data[0].lastname
+                : "Login"}
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
                 aria-hidden="true"
@@ -139,15 +149,26 @@ export default function Nav() {
                   ))}
                 </div>
                 <div className="divide-x divide-gray-900/5 bg-gray-50">
-                  {callsToAction.map((item) => (
+                  {responseData ? (
                     <Link
-                      key={item.name}
-                      to={item.to}
+                      key="logoutUser"
+                      to="/"
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                      onClick={handleLogout}
                     >
-                      {item.name}
+                      Log out
                     </Link>
-                  ))}
+                  ) : (
+                    callsToAction.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.to}
+                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                      >
+                        {item.name}
+                      </Link>
+                    ))
+                  )}
                 </div>
               </Popover.Panel>
             </Transition>
@@ -160,12 +181,14 @@ export default function Nav() {
             <GrCart size={20} className="mx-4" />
             Cart
           </a>
-          <Link
-            to="/vendor"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Become a Seller
-          </Link>
+          {!responseData && (
+            <Link
+              to="/vendor"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Become a Seller
+            </Link>
+          )}
           <a href="#" className="text-sm font-semibold p-[4px]">
             <PiDotsThreeOutlineVerticalFill />
           </a>

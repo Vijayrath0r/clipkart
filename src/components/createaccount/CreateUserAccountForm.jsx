@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import * as yup from "yup";
-const CreateUserAccountForm = ({changePageUser}) => {
+const CreateUserAccountForm = ({ changePageUser }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -11,8 +11,9 @@ const CreateUserAccountForm = ({changePageUser}) => {
     userCity: "",
     userState: "",
     zipCode: "",
+    form: "",
   });
-  const [errors, serError] = useState({});
+  const [errors, setError] = useState({});
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -51,19 +52,23 @@ const CreateUserAccountForm = ({changePageUser}) => {
     e.preventDefault();
     try {
       await userSchema.validate(formData, { abortEarly: false });
-      console.log("form submitted", formData);
-
       const response = await axios.post(
         "http://localhost:3002/user/create",
         formData
       );
-      console.log(response);
+      if (response.data.status == 0) {
+        const newError = {};
+        newError["userEmail"] = response.data.message;
+        setError(newError);
+      } else {
+        setError({});
+      }
     } catch (error) {
       const newError = {};
       error.inner.forEach((err) => {
         newError[err.path] = err.message;
       });
-      serError(newError);
+      setError(newError);
     }
   };
   return (
@@ -236,6 +241,7 @@ const CreateUserAccountForm = ({changePageUser}) => {
             />
           </div>
         </div>
+        {errors.form && <p className="text-red-500 text-xs">{errors.form}</p>}
         <div className="flex flex-wrap -mx-3 mb-6">
           <button
             className="appearance-none block w-full bg-blue-500 text-white border border-gray-200 rounded py-3 px-4 m-3  leading-tight focus:outline-none focus:bg-blue-600 focus:scale-105"

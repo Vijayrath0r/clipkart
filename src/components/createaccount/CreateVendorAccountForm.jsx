@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import * as yup from "yup";
-const CreateVendorAccountForm = ({changePageUser}) => {
+const CreateVendorAccountForm = ({ changePageUser }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -51,13 +51,11 @@ const CreateVendorAccountForm = ({changePageUser}) => {
     e.preventDefault();
     try {
       await userSchema.validate(formData, { abortEarly: false });
-      console.log("form submitted", formData);
 
       const response = await axios.post(
         "http://localhost:3002/user/create",
         formData
       );
-      console.log(response);
     } catch (error) {
       const newError = {};
       error.inner.forEach((err) => {
