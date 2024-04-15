@@ -1,41 +1,35 @@
-import axios from 'axios'
-import { useState, useEffect } from "react"
+import axios from 'axios';
+import { useState, useEffect } from "react";
 
+const useFetch = (url, requestMethod = "GET", payLoad = {}) => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-const useFetch = (url) => {
-
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const fetchData = async (method) => {
+        setLoading(true);
+        try {
+            let res;
+            if (method === "POST") {
+                res = await axios.post(url, payLoad);
+            } else {
+                res = await axios.get(url);
+            }
+            setData(res.data);
+        } catch (error) {
+            setError(true);
+        }
+        setLoading(false);
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
-            try {
-                const res = await axios.get(url)
-                setData(res.data)
-            } catch (error) {
-                setError(true)
-            }
-            setLoading(false)
-        }
-        fetchData();
+        const fetchDataAsync = async () => {
+            await fetchData(requestMethod);
+        };
+        fetchDataAsync();
+    }, [url, requestMethod, JSON.stringify(payLoad)]); // Added payLoad to dependency array
 
-    }, [url])
-    const refetchData = async () => {
-        setLoading(true)
-        try {
-            const res = await axios.get(url)
-            setData(res.data)
-        } catch (error) {
-            setError(true)
-        }
-        setLoading(false)
-    }
+    return { data, loading, error, refetchData: () => fetchData(requestMethod) };
+};
 
-    return { data, loading, error, refetchData }
-
-}
-
-
-export default useFetch
+export default useFetch;

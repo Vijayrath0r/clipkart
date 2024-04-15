@@ -10,6 +10,7 @@ import ViewCart from "./pages/ViewCart.jsx";
 import User from "./pages/User.jsx";
 import Vendor from "./pages/Vendor.jsx";
 import VendorTemplate from "./pages/VendorTemplate.jsx";
+import DashboardContainer from "./components/dashboard/DashboardContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
     element: <VendorTemplate />,
     children: [
       { path: "", element: <Vendor /> },
-      { path: "dashboard", element: <div>This is dashboard</div> },
+      { path: "dashboard", element: <DashboardContainer /> },
     ],
   },
 ]);

@@ -37,7 +37,9 @@ const VendorLogin = ({ changePageUser }) => {
       if (response.data.status == 0) {
         setError(true);
       } else {
-        navigate("/", { state: { responseData: response.data } });
+        navigate("/vendor/dashboard", {
+          state: { responseData: response.data },
+        });
         window.location.reload();
       }
     } catch (error) {
