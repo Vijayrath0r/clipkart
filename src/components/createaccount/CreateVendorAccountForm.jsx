@@ -57,7 +57,6 @@ const CreateVendorAccountForm = ({ changePageUser }) => {
     try {
       setError({});
       await userSchema.validate(formData, { abortEarly: false });
-      console.log(formData);
 
       const response = await axios.post(
         "http://localhost:3002/vendor/create",

@@ -1,5 +1,4 @@
-const DashboardProductItem = ({ product }) => {
-  console.log(product);
+const DashboardProductItem = ({ product, openModal }) => {
   return (
     <div className="w-72 m-5 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
       <a href="#">
@@ -19,12 +18,17 @@ const DashboardProductItem = ({ product }) => {
             <p className="text-lg font-semibold text-black cursor-auto my-3">
               $149
             </p>
-            <p>
-              <p className="text-sm text-gray-600 cursor-auto ml-2">
-                {product.personalstock}
-              </p>
-            </p>
-            <div className="ml-auto">
+            <span>
+              <span className="text-sm text-gray-600 cursor-auto ml-2">
+                Our price
+              </span>
+            </span>
+          </div>
+          <div className="flex items-center">
+            <div
+              className="ml-auto"
+              onClick={() => openModal(product.productid)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -40,6 +44,14 @@ const DashboardProductItem = ({ product }) => {
                 <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
               </svg>
             </div>
+            <p className="text-lg font-semibold text-black cursor-auto my-3 ml-2">
+              {product.personalstock}
+            </p>
+            <span>
+              <span className="text-sm text-gray-600 cursor-auto ml-2">
+                In Stocks
+              </span>
+            </span>
           </div>
         </div>
       </a>
