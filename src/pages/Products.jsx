@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 
 const Products = () => {
   const { data } = useFetch("https://dummyjson.com/products");
-  const productList = data.products;
+  const productList = data && data.products;
   return (
     <div className="w-full">
       {productList && productList.length > 0 ? (

@@ -1,9 +1,10 @@
 import { MdOutlineStar } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const ProductListItem = ({ productData }) => {
   return (
     <>
-      <div className="flex h-[250px] p-5">
+      <Link to="/product" className="flex h-[250px] p-5">
         <div className="w-3/12">
           <img
             className="h-[100%] w-[100%] rounded-3xl"
@@ -58,7 +59,7 @@ const ProductListItem = ({ productData }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
       <hr />
     </>
   );
