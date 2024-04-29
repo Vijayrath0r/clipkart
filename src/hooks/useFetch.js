@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const useFetch = (url, requestMethod = "GET", payLoad = {}) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null); // Changed to null to capture error message
 
     const fetchData = async (method) => {
         setLoading(true);
@@ -17,7 +17,7 @@ const useFetch = (url, requestMethod = "GET", payLoad = {}) => {
             }
             setData(res.data);
         } catch (error) {
-            setError(true);
+            setError(error); // Set error to capture error message
         }
         setLoading(false);
     };
@@ -27,7 +27,7 @@ const useFetch = (url, requestMethod = "GET", payLoad = {}) => {
             await fetchData(requestMethod);
         };
         fetchDataAsync();
-    }, [url, requestMethod, JSON.stringify(payLoad)]); // Added payLoad to dependency array
+    }, [url, requestMethod, JSON.stringify(payLoad)]);
 
     return { data, loading, error, refetchData: () => fetchData(requestMethod) };
 };

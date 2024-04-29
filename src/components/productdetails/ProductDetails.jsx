@@ -8,28 +8,18 @@ import ProductOfferBlock from "./ProductOfferBlock";
 import ProductTypeBlock from "./ProductTypeBlock";
 import BestDeals from "../bestdeals/BestDeals";
 import RecentlyVisitedContainer from "../recentlyvisited/RecentlyVisitedContainer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const ProductDetails = () => {
-  const product = {
-    id: 1,
-    title: "iPhone 9",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-    images: [
-      "https://cdn.dummyjson.com/product-images/1/1.jpg",
-      "https://cdn.dummyjson.com/product-images/1/2.jpg",
-      "https://cdn.dummyjson.com/product-images/1/3.jpg",
-      "https://cdn.dummyjson.com/product-images/1/4.jpg",
-      "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-    ],
-  };
+  const { productId } = useParams();
+  const { data } = useFetch("http://localhost:3002/product/getProduct", "POST", { productId });
+  const product = data && data.productData;
+
+  if (!product) {
+    return null; // If product is null, return null to render nothing
+  }
+
   return (
     <>
       <div className="flex my-1 p-3 bg-white">
@@ -93,4 +83,5 @@ const ProductDetails = () => {
     </>
   );
 };
+
 export default ProductDetails;

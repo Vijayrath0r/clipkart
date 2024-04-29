@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const ProductImageBlock = ({ productImages }) => {
   let [selectedImage, setSelectedImage] = useState(productImages[0]);
+  useEffect(() => {
+    setSelectedImage(productImages[0]);
+  }, [productImages]);
   const handleOnClick = (image) => {
     setSelectedImage(image);
   };
@@ -16,6 +19,7 @@ const ProductImageBlock = ({ productImages }) => {
                 handleOnClick(image);
               }}
               alt="Big picture"
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
             />
           </div>
         ))}

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const ProductListItem = ({ productData }) => {
   return (
     <>
-      <Link to="/product" className="flex h-[250px] p-5">
-        <div className="w-3/12">
+      <Link to={`/product/${productData.id}`} className="flex h-[250px] p-5">
+        <div className="w-3/12 flex justify-center">
           <img
-            className="h-[100%] w-[100%] rounded-3xl"
+            className="h-[100%] rounded-3xl"
             src={productData.thumbnail}
             alt=""
           />

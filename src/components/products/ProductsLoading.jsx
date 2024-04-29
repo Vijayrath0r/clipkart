@@ -12,10 +12,10 @@ const ProductsLoading = () => {
       stock: 100,
       brand: "Brand",
       category: "Catogory",
-      thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      thumbnail: "/product/phone1.webp",
     },
     {
-      id: 1,
+      id: 2,
       title: "Product",
       description: "description",
       price: 100,
@@ -24,7 +24,7 @@ const ProductsLoading = () => {
       stock: 100,
       brand: "Brand",
       category: "Catogory",
-      thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      thumbnail: "/product/phone1.webp",
     },
   ];
   return (

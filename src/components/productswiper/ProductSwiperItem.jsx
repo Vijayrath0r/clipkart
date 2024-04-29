@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 
-const ProductSwiperItem = ({ productName, productImage }) => {
+const ProductSwiperItem = ({ productId, productName, productImage }) => {
   return (
     <Link
-      to="/product"
+      to={`/product/${productId}`}
       className="flex flex-col border border-solid rounded-2xl w-full h-max"
     >
       <img
-        class="p-8 rounded-t-lg"
-        src={"/product/" + productImage}
+        className="p-8 rounded-t-lg object-contain"
+        style={{ aspectRatio: "3/4" }}
+        src={productImage}
         alt="product image"
       />
       <span className="text-center">{productName}</span>

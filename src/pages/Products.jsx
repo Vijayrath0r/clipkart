@@ -3,8 +3,11 @@ import ProductsLoading from "../components/products/ProductsLoading";
 import useFetch from "../hooks/useFetch";
 
 const Products = () => {
-  const { data } = useFetch("https://dummyjson.com/products");
-  const productList = data && data.products;
+  const { data } = useFetch("http://localhost:3002/product/getProducts", "POST", {
+    category: "all",
+    limit: -1
+  });
+  const productList = data && data.productData;
   return (
     <div className="w-full">
       {productList && productList.length > 0 ? (

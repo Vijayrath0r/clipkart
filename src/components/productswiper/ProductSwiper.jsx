@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProductSwiperItem from "./ProductSwiperItem";
 
-export default ({ productList }) => {
+const ProductSwiper = ({ productList }) => {
   return (
     <Swiper
       // install Swiper modules
@@ -20,13 +20,18 @@ export default ({ productList }) => {
       navigation
     >
       {productList.map((product) => (
-        <SwiperSlide>
+        <SwiperSlide key={product.id}>
           <ProductSwiperItem
-            productName={product.productName}
-            productImage={product.productImage}
+            key={product.id}
+            productId={product.id}
+            productName={product.title}
+            productImage={product.thumbnail}
           />
         </SwiperSlide>
       ))}
     </Swiper>
   );
 };
+
+
+export default ProductSwiper;

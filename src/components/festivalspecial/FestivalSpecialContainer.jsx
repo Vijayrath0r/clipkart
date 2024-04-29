@@ -23,6 +23,7 @@ const FestivalSpecialContainer = () => {
         <div className="w-full h-full h-[90%]">
           {prodList.map((product) => (
             <FestivalCard
+              key={product.id}
               productName={product.productName}
               productImage={product.productImage}
             />

@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
 import ProductSwiper from "../productswiper/ProductSwiper";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import useFetch from "../../hooks/useFetch";
 
 const BestDeals = () => {
-  const productList = [
-    { productName: "phone 1", productImage: "phone1.webp" },
-    { productName: "phone 2", productImage: "phone2.webp" },
-    { productName: "phone 3", productImage: "phone3.webp" },
-    { productName: "phone 4", productImage: "phone4.webp" },
-    { productName: "phone 5", productImage: "phone5.webp" },
-    { productName: "phone 6", productImage: "phone6.webp" },
-    { productName: "phone 1", productImage: "phone1.webp" },
-    { productName: "phone 2", productImage: "phone2.webp" },
-    { productName: "phone 3", productImage: "phone3.webp" },
-  ];
+  const { data } = useFetch("http://localhost:3002/product/getProducts", "POST", {
+    category: "smartphones",
+    limit: 9
+  });
   return (
     <>
       <div className="flex h-96 my-5">
@@ -29,9 +23,11 @@ const BestDeals = () => {
               />
             </Link>
           </div>
-          <div className="p-5">
-            <ProductSwiper productList={productList} />
-          </div>
+          {data &&
+            <div className="p-5">
+              <ProductSwiper key={"bestDealsSwiper"} productList={data.productData} />
+            </div>
+          }
         </div>
         <div className="w-1/6 h-96">
           <img src="/flightcoupon.webp" alt="" className="h-full w-full" />
