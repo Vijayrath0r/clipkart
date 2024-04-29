@@ -11,6 +11,8 @@ import User from "./pages/User.jsx";
 import Vendor from "./pages/Vendor.jsx";
 import VendorTemplate from "./pages/VendorTemplate.jsx";
 import DashboardContainer from "./components/dashboard/DashboardContainer.jsx";
+import { Provider } from 'react-redux';
+import store from './store';
 
 const router = createBrowserRouter([
   {
@@ -47,8 +49,10 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

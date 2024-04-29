@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import ProductSwiper from "../productswiper/ProductSwiper";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { useSelector } from "react-redux";
 const RecentlyVisitedContainer = () => {
-  const productList = [
-    { productName: "phone 6", productImage: "phone6.webp" },
-    { productName: "phone 1", productImage: "phone1.webp" },
-  ];
+  const recentlyVisited = useSelector((state) => state.products.recentlyVisited);
+  if (recentlyVisited.length < 1) {
+    return null;
+  }
   return (
     <div className="bg-white my-4">
       <div className="flex justify-between">
@@ -14,8 +15,8 @@ const RecentlyVisitedContainer = () => {
           <IoIosArrowDroprightCircle size={30} style={{ color: "#2a55e5" }} />
         </Link>
       </div>
-      <div className="p-5 h-[360px]">
-        <ProductSwiper productList={productList} />
+      <div className="p-5 h-[390px]">
+        <ProductSwiper productList={recentlyVisited} />
       </div>
     </div>
   );

@@ -23,9 +23,7 @@ const ProductSwiper = ({ productList }) => {
         <SwiperSlide key={product.id}>
           <ProductSwiperItem
             key={product.id}
-            productId={product.id}
-            productName={product.title}
-            productImage={product.thumbnail}
+            product={product}
           />
         </SwiperSlide>
       ))}
