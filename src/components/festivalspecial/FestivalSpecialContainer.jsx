@@ -10,8 +10,8 @@ const FestivalSpecialContainer = () => {
     { productName: "Pants", productImage: "prod4.webp" },
   ];
   return (
-    <div className="flex h-[800px] my-2 bg-white">
-      <div className="w-1/3 h-full">
+    <div className="flex flex-col md:flex-row h-auto my-2 bg-white">
+      <div className="md:w-1/3 h-full">
         <div className="flex justify-between">
           <div className="text-[20px] font-medium p-5 h-[10%]">
             Festive Specials, Just For You!
@@ -30,7 +30,7 @@ const FestivalSpecialContainer = () => {
           ))}
         </div>
       </div>
-      <div className="w-2/3 h-full">
+      <div className="md:w-2/3 h-auto">
         <img className="h-full" src="/festivalside.webp" alt="" />
       </div>
     </div>

@@ -8,14 +8,14 @@ const RecentlyVisitedContainer = () => {
     return null;
   }
   return (
-    <div className="bg-white my-4">
+    <div className="bg-white my-4 h-auto">
       <div className="flex justify-between">
         <div className="text-[20px] font-medium p-5">Recently Viewed</div>
         <Link to="/products" className="p-5">
           <IoIosArrowDroprightCircle size={30} style={{ color: "#2a55e5" }} />
         </Link>
       </div>
-      <div className="p-5 h-[390px]">
+      <div className="p-5">
         <ProductSwiper productList={recentlyVisited} />
       </div>
     </div>

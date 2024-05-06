@@ -10,8 +10,8 @@ const BestDeals = () => {
   });
   return (
     <>
-      <div className="flex h-96 my-5">
-        <div className="w-5/6 h-96 bg-white">
+      <div className="flex h-auto my-5">
+        <div className="w-5/6 h-auto bg-white">
           <div className="flex justify-between">
             <div className="text-[20px] font-medium p-5">
               Best Deals on Smartphones

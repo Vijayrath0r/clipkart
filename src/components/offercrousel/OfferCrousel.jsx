@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 function OfferCrousel() {
   return (
-    <div className="h-72">
+    <div className="md:h-72">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

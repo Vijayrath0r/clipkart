@@ -13,7 +13,7 @@ const CategoryBar = () => {
     { itemName: "Two Wheelers", itemImage: "bike.webp" },
   ];
   return (
-    <div className="flex bg-white my-5 justify-center">
+    <div className="categorybar flex bg-white my-5 justify-center overflow-scroll">
       {categoryList.map((item) => (
         <CategoryBarItem
           key={item.itemName}
