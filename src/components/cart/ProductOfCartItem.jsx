@@ -1,38 +1,43 @@
 import { FaExclamationCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeProductFromCart } from "../../actions/productActions";
 const ProductOfCartItem = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeProductFromCart({ product }));
+  };
   return (
     <>
       <div className="flex m-2 p-3">
         <div className="w-1/6">
-          <img src={product.image} alt="" />
+          <img src={product.thumbnail} alt="" />
         </div>
         <div className="w-3/6 px-3">
           <div className="flex flex-col justify-between h-full">
             <div>
               <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
-                {product.productName}({product.colorType}, {product.storageType}
-                )
+                {product.title}{product.colorType & ` (${product.colorType}, ${product.storageType})`}
               </div>
-              <div className="text-gray-400">{product.ram}GB RAM</div>
+              <div className="text-gray-400">{product.ram ? product.ram : 8}GB RAM</div>
               <div className="text-gray-400 my-2">
-                <span>Saller:{product.saller}</span>
+                <span>Saller: {product.saller ? product.saller : "Flipcart"}</span>
               </div>
             </div>
             <div>
               <span className="line-through text-gray-400">
-                &#8377;{product.actualPrice}
+                ${product.price}
               </span>
-              <span className="mx-2">&#8377;{product.discountedPrice}</span>
+              <span className="mx-2">${product.price}</span>
               <span className="text-green-600">
-                {product.discountPersent}% Off
+                {product.discountPersent ? product.discountPersent : 10}% Off
               </span>
               <span className="text-green-700 text-sm ml-2">
                 {product.appliedOffers} Offer Applied{" "}
                 <FaExclamationCircle style={{ display: "inline" }} />
               </span>
               <div>
-                +&#8377;{product.securePackagingFee} Secured Packaging Fee{" "}
+                +${product.securePackagingFee ? product.securePackagingFee : 2} Secured Packaging Fee{" "}
               </div>
             </div>
           </div>
@@ -52,7 +57,7 @@ const ProductOfCartItem = ({ product }) => {
           <input
             className="border m-1 p-1 w-12 text-center"
             type="text"
-            value={0}
+            value={1}
           />
           <button className="border text-[22px] px-3 rounded-full">+</button>
         </div>
@@ -60,7 +65,7 @@ const ProductOfCartItem = ({ product }) => {
           <Link>SAVE AND LATER</Link>
         </div>
         <div className="p-3 hover:text-blue-500 font-medium">
-          <Link>REMOVE</Link>
+          <Link onClick={() => handleRemoveFromCart(product)}>REMOVE</Link>
         </div>
       </div>
     </>

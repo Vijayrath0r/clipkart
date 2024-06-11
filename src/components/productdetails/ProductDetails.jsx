@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { MdOutlineStar } from "react-icons/md";
 import { IoCart } from "react-icons/io5";
 import { AiFillThunderbolt } from "react-icons/ai";
@@ -8,11 +9,13 @@ import ProductOfferBlock from "./ProductOfferBlock";
 import ProductTypeBlock from "./ProductTypeBlock";
 import BestDeals from "../bestdeals/BestDeals";
 import RecentlyVisitedContainer from "../recentlyvisited/RecentlyVisitedContainer";
+import { addProductToCart } from '../../actions/productActions';
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
 const ProductDetails = () => {
   const { productId } = useParams();
+  const dispatch = useDispatch();
   const { data } = useFetch("http://localhost:3002/product/getProduct", "POST", { productId });
   const product = data && data.productData;
 
@@ -20,6 +23,9 @@ const ProductDetails = () => {
     return null; // If product is null, return null to render nothing
   }
 
+  const handleAddToCard = (product) => {
+    dispatch(addProductToCart({ product }));
+  };
   return (
     <>
       <div className="flex my-1 p-3 bg-white">
@@ -31,6 +37,7 @@ const ProductDetails = () => {
               <Link
                 to="/viewcart"
                 className="inline-block w-5/12 bg-[#ff9f00] m-1 p-5 text-center"
+                onClick={() => handleAddToCard(product)}
               >
                 <IoCart style={{ display: "inline", padding: "1px" }} />
                 <span>Go To cart</span>
@@ -38,6 +45,7 @@ const ProductDetails = () => {
               <Link
                 to="/viewcart"
                 className="inline-block w-5/12 bg-[#fb641b] m-1 p-5 text-center"
+                onClick={() => handleAddToCard(product)}
               >
                 <AiFillThunderbolt
                   style={{ display: "inline", padding: "1px" }}
