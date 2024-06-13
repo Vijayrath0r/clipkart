@@ -9,7 +9,7 @@ const BigPanelContainer = () => {
   return (
     <div className="flex">
       {data.map((item) => (
-        <BigPanelItems imageName={item} />
+        <BigPanelItems key={item} imageName={item} />
       ))}
     </div>
   );

@@ -2,10 +2,22 @@ import { FaExclamationCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeProductFromCart } from "../../actions/productActions";
+import { useState } from "react";
 const ProductOfCartItem = ({ product }) => {
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
   const handleRemoveFromCart = (product) => {
     dispatch(removeProductFromCart({ product }));
+  };
+
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
   return (
     <>
@@ -53,13 +65,14 @@ const ProductOfCartItem = ({ product }) => {
       </div>
       <div className="flex items-center">
         <div className="flex">
-          <button className="border text-[22px] px-3 rounded-full">-</button>
+          <button className="border text-[22px] px-3 rounded-full" onClick={handleDecrement}>-</button>
           <input
             className="border m-1 p-1 w-12 text-center"
             type="text"
-            value={1}
+            value={quantity}
+            readOnly
           />
-          <button className="border text-[22px] px-3 rounded-full">+</button>
+          <button className="border text-[22px] px-3 rounded-full" onClick={handleIncrement}>+</button>
         </div>
         <div className="p-3 hover:text-blue-500 font-medium">
           <Link>SAVE AND LATER</Link>
