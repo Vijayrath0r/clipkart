@@ -1,39 +1,54 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { getLocation } from "../../services/locationService";
 import useFetch from "../../hooks/useFetch";
-import { useEffect, useState } from "react";
 
 const AddressForCart = () => {
-  const { data } = useFetch("http://localhost:3002/adderess/getDefault", "POST", {
-    userId: 10,
-  });
+  const { isLoggedIn, user } = useSelector((state) => state.user);
+  const { data } = useFetch(
+    isLoggedIn ? "http://localhost:3002/adderess/getDefault" : null,
+    "POST",
+    isLoggedIn ? { userId: user?.id } : null
+  );
 
-  const [addressTitle, setaddressTitle] = useState("");
-  const [addressFull, setaddressFull] = useState("");
+  const [addressTitle, setAddressTitle] = useState("");
+  const [addressFull, setAddressFull] = useState("");
   const [type, setType] = useState("");
 
-  useEffect(() => {
-    if (data && data.status === 0) {
-      getLocation()
-        .then((addressInfo) => {
-          setaddressTitle(addressInfo.address_components[9].long_name);
-          setType("Current");
-          setaddressFull(addressInfo.formatted_address);
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    } else if (data) {
-      const addressData = data.postData[0];
-      setaddressTitle(addressData.fullName + ", " + addressData.pinCode);
-      setType(addressData.type == 1 ? "Home" : "Office");
-      setaddressFull(addressData.line1 + ", " + addressData.line2 + ", " + addressData.city + ", " + addressData.state);
-    }
-  }, [data]);
+  const handleGetLocation = (user = {}) => {
+    getLocation()
+      .then((addressInfo) => {
+        setAddressTitle((user.firstname ? user.firstname + " " + user.lastname + ", " : '') + addressInfo.address_components[9].long_name);
+        setType("Current");
+        setAddressFull(addressInfo.formatted_address);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
-  if (!data) {
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (data) {
+        if (data.status === 0) {
+          handleGetLocation(user);
+        } else {
+          const addressData = data.postData[0];
+          setAddressTitle(addressData.fullName + ", " + addressData.pinCode);
+          setType(addressData.type === 1 ? "Home" : "Office");
+          setAddressFull(addressData.line1 + ", " + addressData.line2 + ", " + addressData.city + ", " + addressData.state);
+        }
+      }
+    } else {
+      handleGetLocation();
+    }
+  }, [data, isLoggedIn]);
+
+  if (!isLoggedIn && !addressFull) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="flex bg-white p-5 mr-3">
       <div className="w-11/12">
@@ -52,4 +67,5 @@ const AddressForCart = () => {
     </div>
   );
 };
+
 export default AddressForCart;

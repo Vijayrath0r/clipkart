@@ -1,22 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import * as yup from "yup";
-const UserLogin = ({ changePageUser }) => {
+import { setUserLogin } from "../../actions/userActions"; // Adjust path as necessary
+import { useNavigate } from "react-router-dom";
+
+const UserLogin = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
   const userLoginSchema = yup.object({
     username: yup
       .string()
       .trim()
       .required("Email is required")
-      .email("Enter an vaild Email"),
+      .email("Enter a valid Email"),
     password: yup.string().trim().required("Password is required"),
   });
-  const [errors, setError] = useState(false);
+
+  const [errors, setErrors] = useState(false);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -24,25 +31,28 @@ const UserLogin = ({ changePageUser }) => {
       [name]: value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await userLoginSchema.validate(formData, { abortEarly: false });
-      setError(false);
+      setErrors(false);
 
       const response = await axios.post(
         "http://localhost:3002/user/login",
         formData
       );
-      if (response.data.status == 0) {
-        setError(true);
+
+      if (response.data.status === 0) {
+        setErrors(true);
       } else {
-        navigate("/", { state: { responseData: response.data } });
-        window.location.reload();
+        const user = response.data.data[0];
+        dispatch(setUserLogin(user));
+        navigate("/");
       }
     } catch (error) {
       if (error.inner && error.inner.length > 0) {
-        setError(true);
+        setErrors(true);
       }
     }
   };

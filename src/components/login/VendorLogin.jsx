@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { setUserLogin } from "../../actions/userActions";
 const VendorLogin = ({ changePageUser }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -37,10 +40,9 @@ const VendorLogin = ({ changePageUser }) => {
       if (response.data.status == 0) {
         setError(true);
       } else {
-        navigate("/vendor/dashboard", {
-          state: { responseData: response.data },
-        });
-        window.location.reload();
+        const user = response.data.data[0];
+        dispatch(setUserLogin(user));
+        navigate("/vendor/dashboard");
       }
     } catch (error) {
       if (error.inner && error.inner.length > 0) {

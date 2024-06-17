@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -11,7 +11,9 @@ import { MdOutlineCardGiftcard } from "react-icons/md";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../actions/userActions";
 const products = [
   {
     name: "My Profile",
@@ -27,7 +29,7 @@ const products = [
   },
   {
     name: "Orders",
-    description: "Your customers’ data will be safe and secure",
+    description: "Your customers` data will be safe and secure",
     href: "#",
     icon: GrCart,
   },
@@ -57,13 +59,11 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const location = useLocation();
-  const [responseData, setResponseData] = useState(
-    location.state?.responseData
-  );
+  const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isLoggedIn, user } = useSelector((state) => state.user);
   const handleLogout = () => {
-    setResponseData(null);
+    dispatch(logoutUser());
   };
 
   return (
@@ -103,10 +103,10 @@ export default function Nav() {
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               <FaRegUserCircle size={24} />
-              {responseData
-                ? responseData.data[0].firstname +
-                  " " +
-                  responseData.data[0].lastname
+              {isLoggedIn
+                ? user.firstname +
+                " " +
+                user.lastname
                 : "Login"}
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
@@ -149,7 +149,7 @@ export default function Nav() {
                   ))}
                 </div>
                 <div className="divide-x divide-gray-900/5 bg-gray-50">
-                  {responseData ? (
+                  {isLoggedIn ? (
                     <Link
                       key="logoutUser"
                       to="/"
@@ -174,14 +174,14 @@ export default function Nav() {
             </Transition>
           </Popover>
 
-          <a
-            href="#"
+          <Link
+            to="/viewcart"
             className="flex text-sm font-semibold leading-6 text-gray-900"
           >
             <GrCart size={20} className="mx-4" />
             Cart
-          </a>
-          {!responseData && (
+          </Link>
+          {!isLoggedIn && (
             <Link
               to="/vendor"
               className="text-sm font-semibold leading-6 text-gray-900"

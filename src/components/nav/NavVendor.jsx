@@ -3,7 +3,7 @@ import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
-import { PiDotsThreeOutlineVerticalFill, PiDiamondsFourBold, } from "react-icons/pi"; 
+import { PiDotsThreeOutlineVerticalFill, PiDiamondsFourBold, } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
 import { IoGiftOutline } from "react-icons/io5";
 import { MdOutlineCardGiftcard } from "react-icons/md";
@@ -11,6 +11,8 @@ import { MdOutlineCardGiftcard } from "react-icons/md";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../actions/userActions";
 const products = [
   {
     name: "My Profile",
@@ -56,13 +58,11 @@ function classNames(...classes) {
 }
 
 export default function NavVendor() {
-  const location = useLocation();
-  const [responseData, setResponseData] = useState(
-    location.state?.responseData
-  );
+  const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isLoggedIn, user } = useSelector((state) => state.user);
   const handleLogout = () => {
-    setResponseData(null);
+    dispatch(logoutUser());
   };
 
   return (
@@ -105,10 +105,10 @@ export default function NavVendor() {
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
               <FaRegUserCircle size={24} />
-              {responseData
-                ? responseData.data[0].firstname +
-                  " " +
-                  responseData.data[0].lastname
+              {isLoggedIn
+                ? user.firstname +
+                " " +
+                user.lastname
                 : "Login"}
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
@@ -151,7 +151,7 @@ export default function NavVendor() {
                   ))}
                 </div>
                 <div className="divide-x divide-gray-900/5 bg-gray-50">
-                  {responseData ? (
+                  {isLoggedIn ? (
                     <Link
                       key="logoutUser"
                       to="/"
