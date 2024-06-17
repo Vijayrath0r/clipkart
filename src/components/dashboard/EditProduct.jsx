@@ -2,6 +2,7 @@ import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 
 const EditProduct = ({ isOpen, onClose, productId }) => {
+  if (!productId) return null;
   const [stock, setStock] = useState(-1);
 
   const increaseStock = () => {
