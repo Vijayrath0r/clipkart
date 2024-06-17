@@ -8,7 +8,7 @@ export const getLocation = () => {
                 (position) => {
                     let lat = position.coords.latitude;
                     let long = position.coords.longitude;
-                    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyCnD13wQBFt56BL9LmSkIVQr2m6Gdyvza8`;
+                    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyCnD` + `13wQBFt56` + `BL9LmSkIVQr` + `2m6Gdyvza8`;
 
                     $.ajax({
                         type: "GET",

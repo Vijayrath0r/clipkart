@@ -7,7 +7,6 @@ const AddressForCart = () => {
   const { data } = useFetch("http://localhost:3002/adderess/getDefault", "POST", {
     userId: 10,
   });
-  console.log(data);
 
   const [addressTitle, setaddressTitle] = useState("");
   const [addressFull, setaddressFull] = useState("");
@@ -17,7 +16,6 @@ const AddressForCart = () => {
     if (data && data.status === 0) {
       getLocation()
         .then((addressInfo) => {
-          console.log(addressInfo);
           setaddressTitle(addressInfo.address_components[9].long_name);
           setType("Current");
           setaddressFull(addressInfo.formatted_address);
