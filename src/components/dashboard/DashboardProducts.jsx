@@ -18,15 +18,15 @@ const DashboardProducts = () => {
     tenant: "vijayorg",
   });
   return (
-    <div className="flex">
+    <div className="flex flex-wrap justify-center">
       {data
         ? data.productList.map((product) => (
-            <DashboardProductItem
-              key={product.stock_id}
-              product={product}
-              openModal={openModal}
-            />
-          ))
+          <DashboardProductItem
+            key={product.stock_id}
+            product={product}
+            openModal={openModal}
+          />
+        ))
         : "this is loading"}
       <EditProduct
         isOpen={isModalOpen}

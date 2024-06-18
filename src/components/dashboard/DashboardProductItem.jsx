@@ -1,6 +1,6 @@
 const DashboardProductItem = ({ product, openModal }) => {
   return (
-    <div className="w-72 m-5 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+    <div className="w-72 m-5 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" onClick={() => openModal(product.productid)}>
       <a href="#">
         <img
           src={product.thumbnail}
@@ -27,7 +27,6 @@ const DashboardProductItem = ({ product, openModal }) => {
           <div className="flex items-center">
             <div
               className="ml-auto"
-              onClick={() => openModal(product.productid)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

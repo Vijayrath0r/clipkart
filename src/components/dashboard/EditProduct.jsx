@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 
 const EditProduct = ({ isOpen, onClose, productId }) => {
   if (!productId) return null;
+  if (!isOpen) return null;
   const [stock, setStock] = useState(-1);
 
   const increaseStock = () => {
@@ -25,7 +26,6 @@ const EditProduct = ({ isOpen, onClose, productId }) => {
   if (data && stock == -1) {
     setStock(data.productData.personalstock);
   }
-  if (!isOpen) return null;
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
       <div

@@ -3,7 +3,7 @@ import DashboardProducts from "./DashboardProducts";
 
 const DashboardContainer = () => {
   return (
-    <div className="px-52">
+    <div className="xl:px-52">
       <div className="bg-white p-3">
         <DashboardHeader />
         <hr />
