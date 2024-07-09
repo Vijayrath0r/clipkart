@@ -9,11 +9,11 @@ import { CiHeart } from "react-icons/ci";
 import { IoGiftOutline } from "react-icons/io5";
 import { MdOutlineCardGiftcard } from "react-icons/md";
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../actions/userActions";
+
 const products = [
   {
     name: "My Profile",
@@ -52,6 +52,7 @@ const products = [
     icon: MdOutlineCardGiftcard,
   },
 ];
+
 let callsToAction = [{ name: "New Customer? Sign up", to: "/user" }];
 
 function classNames(...classes) {
@@ -64,6 +65,10 @@ export default function Nav() {
   const { isLoggedIn, user } = useSelector((state) => state.user);
   const handleLogout = () => {
     dispatch(logoutUser());
+  };
+
+  const handleCloseMobileMenu = () => {
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -104,9 +109,7 @@ export default function Nav() {
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               <FaRegUserCircle size={24} />
               {isLoggedIn
-                ? user.firstname +
-                " " +
-                user.lastname
+                ? user.firstname + " " + user.lastname
                 : "Login"}
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
@@ -130,7 +133,7 @@ export default function Nav() {
                       key={item.name}
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
-                      <div className="flexflex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                      <div className="flex flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
                           className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
                           aria-hidden="true"
@@ -164,6 +167,7 @@ export default function Nav() {
                         key={item.name}
                         to={item.to}
                         className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                        onClick={handleCloseMobileMenu}
                       >
                         {item.name}
                       </Link>
@@ -205,11 +209,7 @@ export default function Nav() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <img className="h-8 w-auto" src="/clipkart.png" alt="" />
             </a>
             <button
               type="button"
@@ -240,9 +240,10 @@ export default function Nav() {
                         {[...products, ...callsToAction].map((item) => (
                           <Disclosure.Button
                             key={item.name}
-                            as="Link"
+                            as={Link}
                             to={item.to}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                            onClick={handleCloseMobileMenu}
                           >
                             {item.name}
                           </Disclosure.Button>
@@ -271,12 +272,13 @@ export default function Nav() {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/user"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={handleCloseMobileMenu}
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>

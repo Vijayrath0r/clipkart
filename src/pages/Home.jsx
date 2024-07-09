@@ -7,7 +7,7 @@ import FestivalSpecialContainer from "../components/festivalspecial/FestivalSpec
 import InfiniteScrollMenu from "../components/infiniteScroll/InfiniteScrollMenu";
 const Home = () => {
   return (
-    <div className="main px-0 md:px-24">
+    <div className="main px-5 md:px-24">
       <CategoryBar />
       <OfferCrousel />
       <BestDeals />

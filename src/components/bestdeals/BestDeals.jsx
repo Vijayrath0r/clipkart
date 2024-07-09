@@ -11,7 +11,7 @@ const BestDeals = () => {
   return (
     <>
       <div className="flex h-auto my-5">
-        <div className="w-5/6 h-auto bg-white">
+        <div className="w-full md:w-5/6 h-auto bg-white overflow-hidden">
           <div className="flex justify-between">
             <div className="text-[20px] font-medium p-5">
               Best Deals on Smartphones
@@ -29,7 +29,7 @@ const BestDeals = () => {
             </div>
           }
         </div>
-        <div className="w-1/6 h-96">
+        <div className="w-full md:w-1/6 hidden md:block">
           <img src="/flightcoupon.webp" alt="" className="h-full w-full" />
         </div>
       </div>
