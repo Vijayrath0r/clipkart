@@ -51,7 +51,7 @@ const AddressForCart = () => {
 
   return (
     <div className="flex bg-white p-5 mr-3">
-      <div className="w-11/12">
+      <div className="md:w-10/12">
         <div>
           <span>Deliver to: </span>
           <span className="font-medium">{addressTitle}</span>
@@ -61,7 +61,7 @@ const AddressForCart = () => {
           <span className="text-sm text-gray-600">{addressFull}</span>
         </div>
       </div>
-      <div className="w-1/12">
+      <div className="md:w-1/12">
         <Link className="border rounded text-blue-600 p-2">Change</Link>
       </div>
     </div>

@@ -25,42 +25,44 @@ const ProductOfCartItem = ({ product }) => {
         <div className="w-1/6">
           <img src={product.thumbnail} alt="" />
         </div>
-        <div className="w-3/6 px-3">
-          <div className="flex flex-col justify-between h-full">
-            <div>
-              <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
-                {product.title}{product.colorType & ` (${product.colorType}, ${product.storageType})`}
-              </div>
-              <div className="text-gray-400">{product.ram ? product.ram : 8}GB RAM</div>
-              <div className="text-gray-400 my-2">
-                <span>Saller: {product.saller ? product.saller : "Flipcart"}</span>
-              </div>
-            </div>
-            <div>
-              <span className="line-through text-gray-400">
-                ${product.price}
-              </span>
-              <span className="mx-2">${product.price}</span>
-              <span className="text-green-600">
-                {product.discountPersent ? product.discountPersent : 10}% Off
-              </span>
-              <span className="text-green-700 text-sm ml-2">
-                {product.appliedOffers} Offer Applied{" "}
-                <FaExclamationCircle style={{ display: "inline" }} />
-              </span>
+        <div className="flex w-5/6 flex-col md:flex-row">
+          <div className="px-3">
+            <div className="flex flex-col justify-between h-full">
               <div>
-                +${product.securePackagingFee ? product.securePackagingFee : 2} Secured Packaging Fee{" "}
+                <div className="w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {product.title}{product.colorType & ` (${product.colorType}, ${product.storageType})`}
+                </div>
+                <div className="text-gray-400">{product.ram ? product.ram : 8}GB RAM</div>
+                <div className="text-gray-400 my-2">
+                  <span>Saller: {product.saller ? product.saller : "Flipcart"}</span>
+                </div>
+              </div>
+              <div>
+                <span className="line-through text-gray-400">
+                  ${product.price}
+                </span>
+                <span className="mx-2">${product.price}</span>
+                <span className="text-green-600">
+                  {product.discountPersent ? product.discountPersent : 10}% Off
+                </span>
+                <span className="text-green-700 text-sm ml-2">
+                  {product.appliedOffers} Offer Applied{" "}
+                  <FaExclamationCircle style={{ display: "inline" }} />
+                </span>
+                <div>
+                  +${product.securePackagingFee ? product.securePackagingFee : 2} Secured Packaging Fee{" "}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="w-2/6 text-right">
-          <span>Delivery by 11,Apr</span>
-          <span className="border divide-x-0 mx-1"></span>
-          <span>
-            <span className="line-through">$1</span>
-            <span className="text-green-600"> Free</span>
-          </span>
+          <div className="md:text-right p-2">
+            <span>Delivery by 11,Apr</span>
+            <span className="border divide-x-0 mx-1"></span>
+            <span>
+              <span className="line-through">$1</span>
+              <span className="text-green-600"> Free</span>
+            </span>
+          </div>
         </div>
       </div>
       <div className="flex items-center">
